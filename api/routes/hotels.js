@@ -1,17 +1,111 @@
-import express from 'express'
+import express from "express";
+import Hotel from "../models/Hotel.js";
 
-const router = express.Router()
+const router = express.Router();
 
-// Create a hotel
-router.post("/", (req,res)=>{
+/**
+ *  This route creates a new hotel in database
+ *  @function
+ *  @async
+ *  @param {Object} req - HTTP request
+ *  @param {Object} req.body - New hotel data
+ *  @param {Object} res - HTTP response
+ *  @returns {Hotel} returns the new hotel data
+ *  @throws {Error} throws 500 status 
+ */
+router.post("/", async (req, res) => {
+  const hotel = new Hotel(req.body);
 
-})
-//  Update a hotel
+  try {
+    const saveNewHotel = await hotel.save();
+    res.status(200).json(saveNewHotel);
+  } catch (e) {
+    res.status(500).json(e);
+  }
+});
 
-// Delete a hotel
+/**
+ *  This route shows information about the wished hotel
+ *  @function
+ *  @async
+ *  @param {Object} req - HTTP request
+ *  @param {Object} req.params.id - Id provided in the URL
+ *  @param {Object} res - HTTP response
+ *  @returns {Hotel} returns the searched hotel data
+ *  @throws {Error} throws 500 status 
+ */
+router.get("/:id", async (req, res) => {
+    try {
+      const hotel = await Hotel.findById(
+        req.params.id
+      );
+      res.status(200).json(hotel);
+    } catch (e) {
+      res.status(500).json(e);
+    }
+  });
 
-// Get info from a hotel
+/**
+ *  This route updates a hotel from the database
+ *  @function
+ *  @async
+ *  @param {Object} req - HTTP request
+ *  @param {String} req.params.id - Id provided in the URL
+ *  @param {Object} req.body - new hotel data
+ *  @param {Object} res - HTTP response
+ *  @returns {Hotel} returns the updated hotel data
+ *  @throws {Error} throws 500 status 
+ */
+router.put("/:id", async (req, res) => {
+  try {
+    const saveNewHotel = await Hotel.findByIdAndUpdate(
+      req.params.id,
+      { $set: req.body },
+      { new: true }
+    );
+    res.status(200).json(saveNewHotel);
+  } catch (e) {
+    res.status(500).json(e);
+  }
+});
 
-// Get all hotels
+/**
+ *  This route deletes a hotel from the database
+ *  @function
+ *  @async
+ *  @param {Object} req - HTTP request
+ *  @param {String} req.params.id - Id provided in the URL
+ *  @param {Object} res - HTTP response
+ *  @returns {Hotel} returns String of success
+ *  @throws {Error} throws 500 status 
+ */
+router.delete("/:id", async (req, res) => {
+    try {
+      await Hotel.findByIdAndDelete(
+        req.params.id
+      );
+      res.status(200).json("This hotel has been deleted");
+    } catch (e) {
+      res.status(500).json(e);
+    }
+  });
 
-export default router
+/**
+ *  This route shows information about all the hotels from the database
+ *  @function
+ *  @async
+ *  @param {Object} req - HTTP request
+ *  @param {Object} res - HTTP response
+ *  @returns {Hotel} returns all the hotels from the database
+ *  @throws {Error} throws 500 status 
+ */
+router.get("/", async (req, res) => {
+    try {
+      const hotels = await Hotel.find();
+      res.status(200).json(hotels);
+    } catch (e) {
+      res.status(500).json(e);
+    }
+  });
+
+export default router;

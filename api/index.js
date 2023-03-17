@@ -26,10 +26,12 @@ mongoose.connection.on("connected", ()=>{
 })
 
 // middlewares
-app.use("/auth", authRoute)
-app.use("/hotels", hotelsRoute)
-app.use("/users", usersRoute)
-app.use("/rooms", roomsRoute)
+app.use(express.json())
+
+app.use("/api/auth", authRoute)
+app.use("/api/hotels", hotelsRoute)
+app.use("/api/users", usersRoute)
+app.use("/api/rooms", roomsRoute)
 
 app.listen (3000, ()=>{
     connect()

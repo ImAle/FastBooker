@@ -1,16 +1,13 @@
 import User from "../models/User.js";
-import {createError} from "../utils/error.js";
 
 
 /**
- *  This function updates a user from the database
+ *  This function updates a user from the database.
  *  @function
  *  @async
- *  @param {Object} req - HTTP request
- *  @param {String} req.params.id - Id provided in the URL
- *  @param {Object} req.body - new user data
- *  @param {Object} res - HTTP response
- *  @returns {User} - returns the updated user data
+ *  @group /controllers/user
+ *  @param {Object} req - Contains the user id to update and the new data for such user
+ *  @param {Object} res - Sends success message along with the already updated user data
  *  @throws {Error} - throws 500 status
  */
 const updateUser = async (req, res) => {
@@ -29,13 +26,12 @@ const updateUser = async (req, res) => {
 
 
 /**
- *  This function deletes a user from the database
+ *  This function deletes a user from the database.
  *  @function
  *  @async
- *  @param {Object} req - HTTP request
- *  @param {String} req.params.id - Id provided in the URL
- *  @param {Object} res - HTTP response
- *  @returns {status} - returns String of success
+ *  @group /controllers/user
+ *  @param {Object} req - Contains the user id to delete
+ *  @param {Object} res - Sends success message along with a text to emphasize the fact
  *  @throws {Error} - throws 500 status
  */
 const deleteUser = async (req, res) => {
@@ -50,13 +46,13 @@ const deleteUser = async (req, res) => {
 
 
 /**
- *  This function shows information about all the users from the database
+ *  This function shows information about all the users from the database.
  *  @function
  *  @async
+ *  @group /controllers/user
  *  @param {Object} req - HTTP request
- *  @param {Object} res - HTTP response
- *  @returns {[User]} returns all the users from the database
- *  @throws {Error} throws 500 status
+ *  @param {Object} res - Sends success message along with all the users data in DB
+ *  @throws {Error} - throws 500 status
  */
 const getAllUsers = async (req, res) => {
   try {
@@ -70,13 +66,12 @@ const getAllUsers = async (req, res) => {
 
 
 /**
- *  This function shows information about the wished user
+ *  This function shows information about the desired user.
  *  @function
  *  @async
- *  @param {Object} req - HTTP request
- *  @param {Object} req.params.id - Id provided in the URL
- *  @param {Object} res - HTTP response
- *  @returns {User} returns the searched user data
+ *  @group /controllers/user
+ *  @param {Object} req - Contains the id of the user to get information from
+ *  @param {Object} res - Sends success message plus the desired user data
  *  @throws {Error} throws 500 status
  */
 const getUser = async (req, res) => {

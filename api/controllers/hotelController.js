@@ -1,14 +1,13 @@
 import Hotel from "../models/Hotel.js";
-import {createError} from "../utils/error.js";
 
 
 /**
  *  This function creates a new hotel in database
  *  @function
  *  @async
- *  @param {Object} req - HTTP request
- *  @param {Object} req.body - New hotel data
- *  @param {Object} res - HTTP response
+ *  @group /controllers/hotel
+ *  @param {Object} req - it contains the needed data to create a new hotel
+ *  @param {Object} res - HTTP response with success message and the data of the new hotel
  *  @returns {Hotel} - returns the new hotel data
  *  @throws {Error} - throws 500 status
  */
@@ -29,10 +28,9 @@ const createNewHotel = async (req, res) => {
  *  This function updates a hotel from the database
  *  @function
  *  @async
- *  @param {Object} req - HTTP request
- *  @param {String} req.params.id - Id provided in the URL
- *  @param {Object} req.body - new hotel data
- *  @param {Object} res - HTTP response
+ *  @group /controllers/hotel
+ *  @param {Object} req - Contains the hotel id to update
+ *  @param {Object} res - Sends success message and the updated hotel
  *  @returns {Hotel} - returns the updated hotel data
  *  @throws {Error} - throws 500 status
  */
@@ -55,9 +53,9 @@ const updateHotel = async (req, res) => {
  *  This function deletes a hotel from the database
  *  @function
  *  @async
- *  @param {Object} req - HTTP request
- *  @param {String} req.params.id - Id provided in the URL
- *  @param {Object} res - HTTP response
+ *  @group /controllers/hotel
+ *  @param {Object} req - Contains the hotel id to delete
+ *  @param {Object} res - Sends success message along with a String to emphasize the fact
  *  @returns {status} - returns String of success
  *  @throws {Error} - throws 500 status
  */
@@ -76,9 +74,9 @@ const deleteHotel = async (req, res) => {
  *  This function shows information about all the hotels from the database
  *  @function
  *  @async
+ *  @group /controllers/hotel
  *  @param {Object} req - HTTP request
- *  @param {Object} res - HTTP response
- *  @returns {Hotel} - returns all the hotels from the database
+ *  @param {Object} res - Sends success massage and all the hotels in DB
  *  @throws {Error} - throws 500 status
  */
 const getAllHotels = async (req, res) => {
@@ -93,12 +91,12 @@ const getAllHotels = async (req, res) => {
 
 
 /**
- *  This function shows information about the wished hotel
+ *  This function shows information about the desired hotel
  *  @function
  *  @async
- *  @param {Object} req - HTTP request
- *  @param {Object} req.params.id - Id provided in the URL
- *  @param {Object} res - HTTP response
+ *  @group /controllers/hotel
+ *  @param {Object} req - Contains the hotel id from which to take information
+ *  @param {Object} res - Sends success message with the desired hotel
  *  @returns {Hotel} - returns the searched hotel data
  *  @throws {Error} - throws 500 status
  */

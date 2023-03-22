@@ -1,12 +1,16 @@
 import express from "express"
 import mongoose from "mongoose"
-import authRoute from './routes/auth.js'
-import hotelsRoute from './routes/hotels.js'
-import roomsRoute from './routes/rooms.js'
-import usersRoute from './routes/users.js'
+import dotenv from 'dotenv'
+import cookieParser from 'cookie-parser'
+import authRoute from './routes/authRoutes.js'
+import hotelsRoute from './routes/hotelsRoutes.js'
+import roomsRoute from './routes/roomsRoutes.js'
+import usersRoute from './routes/usersRoutes.js'
+
+dotenv.config()
 
 const app = express()
-const url = "mongodb://172.17.0.2:27017/test"
+const url = process.env.DATABASE
   
 
 const connect = async ()=>{
@@ -26,6 +30,7 @@ mongoose.connection.on("connected", ()=>{
 })
 
 // middlewares
+app.use(cookieParser())
 app.use(express.json())
 
 app.use("/api/auth", authRoute)
@@ -35,5 +40,5 @@ app.use("/api/rooms", roomsRoute)
 
 app.listen (3000, ()=>{
     connect()
-    console.log(`Server on port ${3000}!`)
+    console.log(`Server up on port ${3000}!`)
 })

@@ -10,7 +10,7 @@ const router = express.Router()
  * @route GET /:id
  * @group users
  */
-router.get("/:id", verify.verifyUserIdentity, UserController.updateUser)
+router.get("/:id", verify.verifyUserIdentity, UserController.getUser)
 
 /**
  * Endpoint to update a certain user data.

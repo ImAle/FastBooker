@@ -5,7 +5,7 @@ import roomController from "../controllers/roomController.js"
 const router = express.Router()
 
 /**
- * Endpoint to get all the rooms in a certain hotel.
+ * Endpoint to create a new room in a certain hotel.
  * Only if you are admin.
  * @route POST /:hotelid
  * @group rooms
@@ -41,6 +41,5 @@ router.delete("/:id", verify.verifyIfAdmin, roomController.deleteRoom)
  * @group rooms
  */
 router.get("/", roomController.getAllRooms)
-
 
 export default router

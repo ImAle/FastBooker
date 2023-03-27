@@ -1,0 +1,35 @@
+{
+  "source": {
+    "include": ["controllers/", "routes/", "utils/"],
+    "includePattern": ".js$",
+    "excludePattern": "(node_modules/|doc)"
+  },
+  "opts": {
+    "recursive": true,
+    "destination": "./docs/"
+  },
+  "templates": {
+    "default": {
+      "sectionOrder": ["Controllers", "Routes", "Utils"],
+      "groups": {
+        "Controllers": {
+          "HotelControllers": "/controllers/hotel",
+          "AuthControllers": "/controllers/authentication",
+          "RoomControllers": "/controllers/room",
+          "UserController": "/controllers/user"
+        },
+        "Routes": {
+          "AuthRoutes": "Authentication",
+          "HotelRoutes": "hotels",
+          "RoomRoutes": "rooms",
+          "UserRoutes": "users"
+        },
+        "Utils": {
+          "Error": "error",
+          "Verification": "verification",
+          "Encryption": "encryption"
+        }
+      }
+    }
+  }
+}
